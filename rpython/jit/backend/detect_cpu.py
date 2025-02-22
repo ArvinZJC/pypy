@@ -20,6 +20,7 @@ MODEL_ARM64       = 'aarch64'
 MODEL_PPC_64      = 'ppc-64'
 MODEL_S390_64     = 's390x'
 MODEL_RISCV_64    = 'riscv64'
+MODEL_LOONGARCH64 = 'loongarch64'
 # don't use '_' in the model strings; they are replaced by '-'
 
 
@@ -33,6 +34,7 @@ def detect_model_from_c_compiler():
         MODEL_X86:    ['i386', '__i386', '__i386__', '__i686__','_M_IX86'],
         MODEL_PPC_64: ['__powerpc64__'],
         MODEL_S390_64:['__s390x__'],
+        MODEL_LOONGARCH64: ['__loongarch64__', '__loongarch_lp64']
     }
     for k, v in mapping.iteritems():
         for macro in v:
@@ -82,6 +84,7 @@ def detect_model_from_host_platform():
             'arm': MODEL_ARM,      # freebsd
             's390x': MODEL_S390_64,
             'riscv64': MODEL_RISCV_64,
+            'loongarch64': MODEL_LOONGARCH64,
             }.get(mach)
 
     if result is None:
@@ -159,6 +162,7 @@ def getcpufeatures(backend_name="auto"):
         MODEL_PPC_64: ['floats'],
         MODEL_S390_64: ['floats'],
         MODEL_RISCV_64: ['floats'],
+        MODEL_LOONGARCH64: ['floats'],
     }[backend_name]
 
 if __name__ == '__main__':

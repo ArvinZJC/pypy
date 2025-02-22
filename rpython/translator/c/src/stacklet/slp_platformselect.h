@@ -20,6 +20,8 @@
 #include "switch_riscv_gcc.h" /* gcc on riscv */
 #elif defined(__GNUC__) && defined(__s390x__)
 #include "switch_s390x_gcc.h"
+#elif defined(__GNUC__) && (defined(__loongarch64) || defined(__loongarch_lp64))
+#include "switch_loongarch64_gcc.h" /* gcc on loongarch64 */
 #else
 #error "Unsupported platform!"
 #endif
